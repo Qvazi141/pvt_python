@@ -5,15 +5,39 @@
 # ‘+’, ‘-’, ‘/’, ‘*’. Результат вывести в виде, например, “Result: 12".
 # Если пользователь ввел, отличную от разрешенных, операцию результат должен быть
 # ‘Result: NaN’ (NaN - сокр. от Not a Number).
-a, b = float(input('Enter first operand: ')), float(input('Enter second operand: '))
-op = input('Enter operator: ')
-if op == '+':
-    print('Result: {0}'.format(a+b))
-elif op == '-':
-    print('Result: {0}'.format(a-b))
-elif op == '*':
-    print('Result: {0}'.format(a*b))
-elif op == '/':
-    print('Result: {0}'.format(a/b))
-else:
-    print('Result: NaN')
+
+
+def calc(a, b, op):
+    if op == '+':
+        rez = a+b
+    elif op == '-':
+        rez = a-b
+    elif op == '*':
+        rez = a*b
+    elif op == '/':
+        rez = a/b
+    else:
+        rez = 'NaN'
+    return rez
+
+# не знал как обработать ввод, пользователи не всегда вводят целочисленный значения,
+# а в выводе должны быть и целочистленные и вещественные, простое окргуление я отбросил,
+# так как терялась бы дробная часть при вводе, в итоге вот такой решение с конструкцией try / except
+
+
+while True:
+    first, second = input('Enter first operand: '), input('Enter second operand: ')
+    operator = input('Enter operator: ')
+    try:
+        print('Result: ', calc(int(first), int(second), operator))
+    except ValueError:
+        print('Result: ', calc(float(first), float(second), operator))
+    s = input('Do you wish to execute one more operation? y/n: ')
+    if s == 'y':
+        continue
+    elif s == 'n':
+        break
+    else:
+        print('Wrong input!')
+        break
+
