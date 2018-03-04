@@ -12,17 +12,17 @@ def my_count(x, l):
 
 
 def inp():
+    s = []
     while True:
         x = input('Enter number: ')
         if x == '':
             break
-        if x.isnumeric():
+        elif x.isnumeric():
             s.append(int(x))
     x = int(input('Input number to count: '))
     return s, x
 
 
 if __name__ == '__main__':
-    s, a = [], 0
-    s, a = inp()
-    print('Count: {}'.format(my_count(a, s)))
+    my_list, number = inp()
+    print('Count: {}'.format(my_count(number, my_list)))
