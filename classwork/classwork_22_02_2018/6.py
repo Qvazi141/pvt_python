@@ -18,13 +18,12 @@ def inp():
 
 
 def list_convection(my_list):
-    index = 0
-    for i in range(len(my_list)):
-        if my_list[i] <= 0:
-            tmp = my_list[i]
-            my_list.remove(my_list[i])
-            my_list.insert(index, tmp)
-            index += 1
+    position = 0
+    for id, value in enumerate(my_list):
+        if value < 0:
+            my_list.insert(position, value)
+            del my_list[id+1]
+            position += 1
     return my_list
 
 
