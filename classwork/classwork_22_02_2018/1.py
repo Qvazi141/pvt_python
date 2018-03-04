@@ -10,12 +10,10 @@ def inp():
 
 def check_word(word):
     word = word.upper()
-    alphabet = 'abcdefjhigklmnopqrstuvwxyz'.upper()
-    if word[0] in alphabet or word[0] == '_':
+    alphabet = 'abcdefjhigklmnopqrstuvwxyz_0123456789'.upper()
+    if word[0] in alphabet[:27]:
         for i in word[1:]:
-            if i in alphabet or i.isnumeric() or i == '_':
-                continue
-            else:
+            if i not in alphabet:
                 return 'is not an identifier'
         return 'is an identifier'
     else:
