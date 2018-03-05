@@ -3,7 +3,8 @@
 
 # функция инициализация двухмерного списка
 def initialization(dimension):
-    return [[int(input('Input elemet {0} {1}: '.format(i, j))) for j in range(dimension)] for i in range(dimension)]
+    return [[int(input('Input element {0} {1}: '.format(i, j))) for j in range(dimension)] for i in range(dimension)]
+
 
 # Функция вывода матрицы
 def print_matrix(matrix):
