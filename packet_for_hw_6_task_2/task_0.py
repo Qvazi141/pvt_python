@@ -13,6 +13,6 @@ def start():
     """Дан список А1..AN. Найти элемент, который чаще всего встречается,
     вывести его значение и количество повторений."""
     n = int(input('Введите N: '))
-    a = [int(input()) for i in range(n)]
+    a = [int(input('Input number: ')) for i in range(n)]
     print('Число {0} Повторяется {1} раз'.format(*find_count(a)))
 
