@@ -1,7 +1,3 @@
-# Дана квадратная матрица А(N,N). Составить программу подсчета количества положительных элементов,
-# расположенных выше главной диагонали.
-
-
 # функция инициализация двухмерного списка
 def initialization(dimension):
     return [[int(input('Input element {0} {1}: '.format(i, j))) for j in range(dimension)] for i in range(dimension)]
@@ -25,7 +21,9 @@ def print_matrix(matrix):
         print()
 
 
-if __name__ == '__main__':
+def start():
+    """ Дана квадратная матрица А(N,N). Составить программу подсчета количества положительных элементов,
+    расположенных выше главной диагонали. """
     n = int(input('Input N: '))
     a = initialization(n)
     print_matrix(a)
