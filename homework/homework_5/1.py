@@ -15,16 +15,16 @@ def print_matrix(matrix):
 
 
 # функция подсчета среднего арифметического значения элементов матрицы.
-def average(matrix):
+def average(matrix, n):
     sum = 0
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             sum += matrix[i][j]
-    return sum / len(matrix)**2
+    return sum / n**2
 
 
 if __name__ == '__main__':
     n = int(input('Input N: '))
     a = initialization(n)
     print_matrix(a)
-    print('Arithmetic mean of matrix elements: {}'.format(average(a)))
+    print('Arithmetic mean of matrix elements: {}'.format(average(a, n)))
