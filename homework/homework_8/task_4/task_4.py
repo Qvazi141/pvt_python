@@ -13,6 +13,7 @@ def test_content(test_result=['desktop.ini', 'web-projects'], test_path = "D:\wo
     result = content(test_path)
     print("Test passed") if result == test_result else print("Test not passed")
 
+
 # точка входа в программу
 if __name__ == "__main__":
     # test_content()

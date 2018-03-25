@@ -1,3 +1,6 @@
+from packet_for_test_hw_7 import test
+
+
 def menu():
     print("-"*40)
     print("Main menu:")
@@ -17,37 +20,16 @@ def push(stack, number):
     return stack + tmp
 
 
-# test push
-def test_push(test_stack=[1, 2, 3, 4], test_number=5, result=[1, 2, 3, 4, 5]):
-    test = push(test_stack, test_number)
-    if result == test:
-        print('test func_push passed')
-
-
 def pop(stack):
     """Удалить из стека последний элемент.
     Программа должна вывести его значение."""
     return stack[-1], stack[:-1]
 
 
-# test pop
-def test_pop(test_stack=[1,2,3,4], result=[1,2,3], result_last_element = 4):
-    test_element, test = pop(test_stack)
-    if result == test and result_last_element == test_element:
-        print('test func_pop passed')
-
-
 def back(stack):
     """Программа должна вывести значение последнего элемента,
     не удаляя его из стека. """
     return stack[-1]
-
-
-# test back
-def test_back(test_stack=(1, 2, 3, 4), result=4):
-    test = back(test_stack)
-    if result == test:
-        print('test func_back passed')
 
 
 def size(stack):
@@ -58,23 +40,9 @@ def size(stack):
     return count
 
 
-# test size
-def test_size(test_stack=(1, 2, 3, 4), result=4):
-    test = size(test_stack)
-    if result == test:
-        print('test func_size passed')
-
-
 def clear():
     """Программа должна очистить стек и вывести ok."""
     return []
-
-
-# test clear
-def test_clear(result=[]):
-    test = clear()
-    if result == test:
-        print('test func_clear passed')
 
 
 if __name__ == "__main__":
@@ -88,11 +56,11 @@ if __name__ == "__main__":
         "clear": clear,
     }
     q = True
-    test_push()
-    test_pop()
-    test_back()
-    test_size()
-    test_clear()
+    test.test_push(push)
+    test.test_pop(pop)
+    test.test_back(back)
+    test.test_size(size)
+    test.test_clear(clear)
     menu()
     while q:
         choice = input('>>> ').lower().split()
