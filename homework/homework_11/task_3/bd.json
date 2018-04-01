@@ -1,0 +1,30 @@
+{
+  "0":
+  {
+    "Name":"Eugene",
+    "Family":"Bulakhau",
+    "Sex":"Male",
+    "Age":"23"
+  },
+  "1":
+  {
+    "Name":"Lara",
+    "Family":"Tara",
+    "Sex":"Femail",
+    "Age":"22"
+  },
+  "2":
+  {
+    "Name":"Angelina",
+    "Family":"Voronina",
+    "Sex":"Femail",
+    "Age":"21"
+  },
+  "3":
+  {
+    "Name":"Anton",
+    "Family":"Amelevich",
+    "Sex":"Male",
+    "Age":"24"
+  }
+}
