@@ -29,12 +29,18 @@ class Elevator:
         except ValueError:
             print("Lift at the 0 floor")
 
-    def commands(self):
+    def commands(self, obj_list):
+        print("-" * 20)
+        print("Statistics:")
+        print("Total number of lifts: {}".format(Elevator.total))
+        for i in range(obj_list):
+            print(
+                "Elevator {0}: name - {1}, number of lifts - {2}".format(i + 1, elevators[i].name, elevators[i].floor))
+        print("-" * 20)
         print("Commands:")
-        print("help - for print commands")
-        print("lift - for lift")
-        print("[lift1] - [lift2] - for sub lift")
-        print("q - for quit elevator")
+        print("help - for print commands and statistics")
+        print("[name] lift - for lift")
+        print("[name1] - [name2] - for sub lift")
         print("exit - for exit program")
 
 
@@ -44,24 +50,22 @@ if __name__ == "__main__":
     elevators = []
     for i in range(count):
         elevators.append(Elevator(input("Enter elevator {} name: ".format(i+1))))
+    elevators[0].commands(count)
     while not app_close:
-        print("-"*20)
-        print("Total number of lifts: {}".format(Elevator.total))
-        for i in range(count):
-            print("Elevator {0}: name - {1}, number of lifts - {2}".format(i+1, elevators[i].name, elevators[i].floor))
-        elevator = int(input("Enter lift for do: ")) - 1
-        elevator_exit = False
-        elevators[elevator].commands()
-        while not elevator_exit:
-            command = input(">>> ")
-            if command == "help":
-                elevators[elevator].commands()
-            elif command == "lift":
-                elevators[elevator].lift()
-            elif command == "q":
-                elevator_exit = True
-            elif command == "exit":
-                elevator_exit = True
-                app_close = True
+        command = input(">>> ").split()
+        if command[0] == "help":
+            elevators[0].commands(count)
+        elif len(command) == 2:
+            if command[1] == "lift":
+                for elevator in elevators:
+                    if elevator.name == command[0].title():
+                        elevator.lift()
+        elif len(command) > 2:
+            if command[1] == "-":
+                l1 = filter(lambda x: x.name == command[0], elevators)
+                l2 = filter(lambda x: x.name == command[2], elevators)
+                print(l1-l2)
+        elif command[0] == "exit":
+            app_close = True
 
 
