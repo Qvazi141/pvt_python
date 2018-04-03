@@ -50,16 +50,16 @@ class Trapeze(FourSidedFigure):
     def input_sides(self):
         try:
             self.a = int(input("Enter side A: "))
-            if self.a < 0 or not isinstance(self.a, int):
+            if self.a <= 0 or not isinstance(self.a, int):
                 raise ValueError
             self.b = int(input("Enter side B: "))
-            if self.b < 0 or not isinstance(self.b, int):
+            if self.b <= 0 or not isinstance(self.b, int):
                 raise ValueError
             self.c = int(input("Enter side C: "))
-            if self.c < 0 or not isinstance(self.c, int):
+            if self.c <= 0 or not isinstance(self.c, int):
                 raise ValueError
             self.d = int(input("Enter side D: "))
-            if self.d < 0 or not isinstance(self.d, int):
+            if self.d <= 0 or not isinstance(self.d, int):
                 raise ValueError
             if not self._check_trapeze():
                 raise ValueError
@@ -71,8 +71,13 @@ class Trapeze(FourSidedFigure):
         return "{0}. Sides: A - {1}, B - {2}, C - {3}, D - {4}".format(self.name, self.a, self.b, self.c, self.d)
 
     def area_find(self):
-        s = (self.a + self.b) / 2 * (self.c**2 - (((self.b-self.a)**2 + self.c**2 - self.d**2) / 2*(self.b - self.a))**2)**0.5
-        print("Area: {}".format(s))
+        try:
+            s = (self.a + self.b) / 2 * (self.c**2 - (((self.b-self.a)**2 + self.c**2 - self.d**2) / 2*(self.b - self.a))**2)**0.5
+            if s == 0:
+                raise ValueError
+            print("Area: {}".format(s))
+        except ValueError:
+            print("Something went wrong, because the area is 0")
 
     def perimeter_find(self):
         print("Perimeter: {}".format(self.a + self.b + self.c + self.d))
@@ -89,6 +94,33 @@ class Trapeze(FourSidedFigure):
             return False
 
 
+class Rectangle(FourSidedFigure):
+    def __init__(self):
+        self.name = "Rectangle"
+        self.a, self.b = 0, 0
+
+    def input_sides(self):
+        try:
+            self.a = int(input("Enter side A: "))
+            if self.a <= 0 or not isinstance(self.a, int):
+                raise ValueError
+            self.b = int(input("Enter side B: "))
+            if self.b <= 0 or not isinstance(self.b, int):
+                raise ValueError
+        except ValueError:
+            print("Value Error")
+            self.a, self.b = 0, 0
+
+    def __str__(self):
+        return "{0}. Sides: A - {1}, B - {2}".format(self.name, self.a, self.b)
+
+    def area_find(self):
+        print("Area: {}".format(self.a*self.b))
+
+    def perimeter_find(self):
+        print("Perimeter: {}".format(self.a*2 + self.b*2))
+
+
 class Square(FourSidedFigure):
     def __init__(self):
         self.name = "Square"
@@ -97,7 +129,7 @@ class Square(FourSidedFigure):
     def input_sides(self):
         try:
             self.a = int(input("Enter side A: "))
-            if self.a < 0 or not isinstance(self.a, int):
+            if self.a <= 0 or not isinstance(self.a, int):
                 raise ValueError
         except ValueError:
             print("Value Error")
@@ -145,13 +177,13 @@ class Triangle(Figure):
     def input_sides(self):
         try:
             self.a = int(input("Enter side A: "))
-            if self.a < 0 or not isinstance(self.a, int):
+            if self.a <= 0 or not isinstance(self.a, int):
                 raise ValueError
             self.b = int(input("Enter side B: "))
-            if self.b < 0 or not isinstance(self.b, int):
+            if self.b <= 0 or not isinstance(self.b, int):
                 raise ValueError
             self.c = int(input("Enter side C: "))
-            if self.c < 0 or not isinstance(self.c, int):
+            if self.c <= 0 or not isinstance(self.c, int):
                 raise ValueError
             if not self._check_triangle():
                 raise ValueError
@@ -216,7 +248,7 @@ def select_menu(figure):
 if __name__ == "__main__":
     application_exit = False
     while not application_exit:
-        print("Enter the shape to create: triangle, square, trapeze, circle")
+        print("Enter the shape to create: triangle, square, rectangle, trapeze, circle")
         shape = input(">>> ")
         if shape == "triangle":
             obj = Triangle()
@@ -227,6 +259,11 @@ if __name__ == "__main__":
             obj = Square()
             obj.input_sides()
             if obj.a != 0:
+                application_exit = select_menu(obj)
+        elif shape == "rectangle":
+            obj = Rectangle()
+            obj.input_sides()
+            if obj.a != 0 and obj.b != 0:
                 application_exit = select_menu(obj)
         elif shape == "trapeze":
             obj = Trapeze()
