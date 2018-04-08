@@ -1,7 +1,20 @@
 import uuid
 import json
 
-#test
+
+class BD:
+    def __init__(self, bd):
+        self.bd_name = bd
+        self.bd_in_dict = {}
+
+    def bd_initializations(self, bd_name):
+        with open(self.bd_name, 'r', encoding='utf-8') as f:
+            try:
+                self.bd_in_dict = json.load(f)
+                for student_id in self.bd_in_dict:
+            except ValueError:
+                print("Bd structure error")
+
 class Team:
     def __init__(self, name, players):
         self.team_id = uuid.uuid4()
@@ -17,7 +30,6 @@ class Player:
 
     #@property
     #def team(self):
-
 
 
 class Match:
