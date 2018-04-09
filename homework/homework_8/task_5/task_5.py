@@ -72,12 +72,8 @@ def touch(path, file_name):
     if not check_arguments(file_name, 2):
         print('Argument mismatch')
         return path
-    try:
-        with open(path+'/'+file_name[1], "r"):
-            print('File already exists')
-    except FileNotFoundError:
-        with open(path+'/'+file_name[1], "w"):
-            print('File created')
+    with open(path+'/'+file_name[1], "w+"):
+        print('File created')
     return path
 
 
