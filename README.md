@@ -6,4 +6,4 @@
 5. homework 5 - Функции и словари в Python;
 6. homework 6 - lambda-функции, модули  в Python;
 7. homework 7 - Базовые структуры данных;
-85. homework 8 - Работа с файлами, рекурсия в  Python.
+85. homework 8 - Работа с файлами, рекурсия в  Python..
