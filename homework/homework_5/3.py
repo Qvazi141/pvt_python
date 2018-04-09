@@ -13,48 +13,49 @@ def add_student():
 
 
 # функция удаления элементов по ключу
-def del_student(student_bd, i):
-    del student_bd[i-1]
-    return student_bd
+def del_student(data, key):
+    del data[key - 1]
+    return data
 
 
 # Функция поиска элементов базы по значениям определнных полей, возвращает словарь совпадений
-def find(student_bd, field, key_word):
-    field = field[0].upper() + field[1:].lower()
-    key_word = key_word.upper()
+def find(data, key_words, fields):
     student = {}
-    for id, i in enumerate(student_bd):
-        if i.get(field).upper() == key_word:
-            student[id] = i
+    for id, i in enumerate(data):
+        for j in range(len(fields)):
+            if i.get(fields[j]).upper() == key_words[j].upper():
+                student[id] = i
     return student
 
 
 # функция вывода базы
-def print_bd(student_bd):
-    for id, i in enumerate(student_bd):
+def print_bd(data):
+    for id, i in enumerate(data):
         print('Student № {}: '.format(id + 1))
         for j in i:
-            print('{0}: {1}'.format(j, student_bd[id][j]))
+            print('{0}: {1}'.format(j, data[id][j]))
         print()
     print('-' * 20)
 
 
 # основная программа
 if __name__ == '__main__':
-    bd = [{'Name': 'Lara', 'Surname': 'Scomor', 'Sex': 'Female', 'Age': '22'}]
+    student_bd = [{'Name': 'Lara', 'Surname': 'Scomor', 'Sex': 'Female', 'Age': '22'}]
     while True:
         inp = input('Enter:\n"add" - for add student\n"del" - for delete student\n"print" - for print group list'
                     '\n"find" - for find\n"q" - for exit program \n')
         if inp == 'q':
             break
         elif inp == 'add':
-            bd.append(add_student())
+            student_bd.append(add_student())
         elif inp == 'del':
-            bd = del_student(bd, int(input('input student number: ')))
+            student_bd = del_student(student_bd, int(input('input student number: ')))
         elif inp == 'find':
-            f = input('Enter search fields Name/Surname/Sex/Age: ')
-            search_word = input('Input word for search: ')
-            bd_for_find = find(bd, f, search_word)
+            fields_for_find = input('Enter search fields Name/Surname/Sex/Age: ').split("/")
+            search_words = []
+            for i in fields_for_find:
+                search_words.append(input("Enter {} for search: ".format(i)))
+            bd_for_find = find(student_bd, search_words, fields_for_find)
             print(*bd_for_find.items())
         elif inp == 'print':
-            print_bd(bd)
+            print_bd(student_bd)
