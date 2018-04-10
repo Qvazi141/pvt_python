@@ -23,24 +23,24 @@ class BD:
         if self._bd_name == "players":
             self.obj_in_dict[object_id] = Player(object_id, data)
         if self._bd_name == "teams":
-            self.obj_in_dict[object_id] = Team(object_id, data, players)
+            self.obj_in_dict[object_id] = Team(object_id, data, CONST_PLAYERS.obj_in_dict)
 
 
 class Team:
     _structure_team = ['Name']
 
-    def __init__(self, team_id, data, bd_players):
+    def __init__(self, team_id, data, bd_players={}):
         self._team_id = team_id
-        self._name = data[Team._structure_team[0]]
+        self.name = data[Team._structure_team[0]]
         self._bd_players = bd_players
         self._players = self.players
 
     @property
     def players(self):
         consist = {}
-        for player in self._bd_players.obj_in_dict:
-            if self._bd_players.obj_in_dict[player].team_id == self._team_id:
-                consist[player] = self._bd_players.obj_in_dict[player]
+        for player in self._bd_players:
+            if self._bd_players[player].team_id == self._team_id:
+                consist[player] = (self._bd_players[player].name, self._bd_players[player].family)
         return consist
 
 
@@ -51,7 +51,14 @@ class Player:
         self._player_id = player_id
         self.name = data[Player._structure_player[0]]
         self.family = data[Player._structure_player[1]]
-        self.team_id = data[Player._structure_player[2]]
+        self._team_id = data[Player._structure_player[2]]
+
+    @property
+    def team(self):
+        for team_id in CONST_TEAMS.obj_in_dict:
+            if self._team_id == team_id:
+                team_name = team_id.name
+        return team_name
 
 
 class Match:
@@ -66,8 +73,8 @@ class Match:
 
 
 if __name__ == "__main__":
-    players = BD('players.json', 'players')
-    players.bd_initializations()
-    teams = BD('teams.json', 'teams')
-    teams.bd_initializations()
-
+    CONST_PLAYERS = BD('players.json', 'players')
+    CONST_PLAYERS.bd_initializations()
+    CONST_TEAMS = BD('teams.json', 'teams')
+    CONST_TEAMS.bd_initializations()
+    print(CONST_TEAMS.obj_in_dict['0'].players)
