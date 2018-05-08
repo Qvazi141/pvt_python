@@ -6,9 +6,9 @@ def test_push(func, test_stack=[1, 2, 3, 4], test_number=5, result=[1, 2, 3, 4, 
 
 
 # test pop
-def test_pop(func, test_stack=[1,2,3,4], result=[1,2,3], result_last_element = 4):
-    test_element, test = func(test_stack)
-    if result == test and result_last_element == test_element:
+def test_pop(func, test_stack=[1,2,3,4], result_last_element = 4):
+    test_element = func(test_stack)
+    if result_last_element == test_element:
         print('test func_pop passed')
 
 

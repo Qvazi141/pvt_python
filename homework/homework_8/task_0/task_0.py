@@ -24,6 +24,6 @@ def test_to_write(file_name, test_file = "test_file.txt"):
 
 
 if __name__ == "__main__":
-    my_filename = "my_file.txt"
+    my_filename = input("Enter file name: ")
     to_write(my_filename)
     test_to_write(my_filename)

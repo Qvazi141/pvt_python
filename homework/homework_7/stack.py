@@ -23,7 +23,7 @@ def push(stack, number):
 def pop(stack):
     """Удалить из стека последний элемент.
     Программа должна вывести его значение."""
-    return stack[-1], stack[:-1]
+    return stack[-1]
 
 
 def back(stack):
@@ -75,7 +75,8 @@ if __name__ == "__main__":
                 menu_actions['menu']()
         elif choice[0] == 'pop':
             try:
-                pop_element, main_stack = menu_actions[choice[0]](main_stack)
+                pop_element,  = menu_actions[choice[0]](main_stack)
+                main_stack = main_stack[:-1]
                 print(">>> {}".format(pop_element))
             except KeyError:
                 print('Is there something wrong')
